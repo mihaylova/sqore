@@ -7,6 +7,6 @@ class Question
   validates_presence_of :text, :tag
 
   belongs_to :question_set, foreign_key: 'tag'
-  has_many :options
+  embeds_many :options
   has_many :answers
 end

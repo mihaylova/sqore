@@ -3,7 +3,6 @@ class Option
 
   field :text, type: String
   field :score, type: Integer
-  field :question_id, type: Integer
 
-  belongs_to :question
+  embedded_in :question
 end
