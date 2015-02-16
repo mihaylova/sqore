@@ -8,4 +8,5 @@ class Question
 
   belongs_to :question_set, foreign_key: 'tag'
   has_many :options
+  has_many :answers
 end
