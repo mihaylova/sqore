@@ -32,6 +32,18 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.1.0'
+  gem 'guard-rspec', '~> 4.5.0'
+  gem 'guard-spork', '~> 2.1.0'
+  gem 'spork', git: 'https://github.com/sporkrb/spork.git'
+  gem 'childprocess', '~> 0.5.5'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'rspec', '~> 3.1.0'
+  gem 'pry'
+  gem 'pry-debugger'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
