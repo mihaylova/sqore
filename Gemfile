@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec', '~> 3.1.0'
   gem 'pry'
   gem 'pry-debugger'
+  gem 'database_cleaner', '~> 1.0.1'
 end
 
 # Use ActiveModel has_secure_password
