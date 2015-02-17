@@ -16,7 +16,7 @@ class Submission
 
   def update_total
     scores = answers.map(&:score)
-    if scores.select(&:nil?).any?
+    if scores.any?(&:nil?)
       update(checked: false)
     else
       update(total: scores.sum, checked: true)
