@@ -29,4 +29,35 @@ RSpec.describe Answer, :type => :model do
       it { expect(answer.score).to be 0 }
     end
   end
+
+  describe '#update_submission_total' do
+    let(:question) { FactoryGirl.create(:question) }
+    let(:option) { FactoryGirl.create(:option, score: 1, question: question) }
+    let(:submission) { FactoryGirl.create(:submission) }
+
+    context 'when all answers have score' do
+      before do
+        FactoryGirl.create_list(:answer, 2,
+                                text: option.text,
+                                question: question,
+                                submission: submission)
+      end
+
+      it { expect(submission.total).to be 2 }
+      it { expect(submission.checked).to be true }
+    end
+
+    context 'when some answers do not have score' do
+      let(:open_question) { FactoryGirl.create(:question) }
+
+      before do
+        FactoryGirl.create(:answer,
+                           text: option.text,
+                           question: open_question,
+                           submission: submission)
+      end
+
+      it { expect(submission.checked).to be false }
+    end
+  end
 end
