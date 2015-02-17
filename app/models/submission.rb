@@ -14,6 +14,9 @@ class Submission
   validates_presence_of :user_id, :submitted_at
   validates_associated :competition
 
+  default_scope -> { where(checked: true) }
+  scope :unchecked, -> { where(checked: false) }
+
   def update_total
     scores = answers.map(&:score)
     if scores.any?(&:nil?)
