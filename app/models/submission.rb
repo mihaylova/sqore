@@ -11,6 +11,8 @@ class Submission
   belongs_to :competition
   has_many :answers
 
+  validates_presence_of :user_id, :competition_id, :submitted_at
+
   def update_total
     scores = answers.map(&:score)
     if scores.select(&:nil?).any?
