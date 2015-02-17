@@ -15,6 +15,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'database_cleaner'
+require 'factory_girl'
 
 RSpec.configure do |config|
   config.before(:suite) do
@@ -28,6 +29,8 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseCleaner.clean
   end
+
+  config.include FactoryGirl::Syntax::Methods
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
