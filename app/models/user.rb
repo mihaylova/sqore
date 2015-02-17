@@ -7,6 +7,9 @@ class User
   validates_presence_of :name, :email
   validates_uniqueness_of :email
 
-  embeds_many :user_cloud_storage_files
+  embeds_many :files,
+              class_name: 'UserCloudStorageFile',
+              store_as: 'user_cloud_storage_files'
+
   has_many :submissions, dependent: :destroy
 end

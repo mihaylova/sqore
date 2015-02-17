@@ -9,7 +9,7 @@ class Competition
       { name: submission.user.name,
         email: submission.user.email,
         total: submission.total,
-        user_files: submission.user.user_cloud_storage_files.map(&:url).join(', ') }
+        user_files: submission.user.files.map(&:url).join(', ') }
     end
   end
 end
