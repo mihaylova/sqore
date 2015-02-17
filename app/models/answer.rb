@@ -10,7 +10,8 @@ class Answer
   belongs_to :submission
   belongs_to :question
 
-  validates_presence_of :text, :question_id, :submission_id
+  validates_presence_of :text
+  validates_associated :question, :submission
 
   # Are we actually going to destroy answers?
   # before_destroy :update_submission_total

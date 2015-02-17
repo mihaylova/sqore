@@ -11,7 +11,8 @@ class Submission
   belongs_to :competition
   has_many :answers, dependent: :destroy
 
-  validates_presence_of :user_id, :competition_id, :submitted_at
+  validates_presence_of :user_id, :submitted_at
+  validates_associated :competition
 
   def update_total
     scores = answers.map(&:score)
