@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Answer, :type => :model do
-  describe '#calculate_score' do
+  describe '#set_score' do
     let!(:question) { FactoryGirl.create(:question) }
 
     describe 'on Quiz question' do
@@ -22,6 +22,11 @@ RSpec.describe Answer, :type => :model do
     describe 'on Open question' do
       let!(:answer) { FactoryGirl.create(:answer, question: question) }
       it { expect(answer.score).to be nil }
+    end
+
+    context 'when the answer is skipped' do
+      let!(:answer) { FactoryGirl.create(:answer, question: question, skipped: true) }
+      it { expect(answer.score).to be 0 }
     end
   end
 end
