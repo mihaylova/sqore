@@ -16,13 +16,18 @@ class Answer
   # before_destroy :update_submission_total
 
   after_save :update_submission_total
-  after_create :calculate_score
+  after_create :set_score
 
   def update_submission_total
     submission.update_total
   end
 
   def calculate_score
-    update(score: question.options.where(text: text).first.score) if question.options?
+    return 0 if skipped
+    question.options.where(text: text).first.score if question.options?
+  end
+
+  def set_score
+    update(score: calculate_score)
   end
 end
