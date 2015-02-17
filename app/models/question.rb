@@ -8,5 +8,5 @@ class Question
 
   belongs_to :question_set, foreign_key: 'tag'
   embeds_many :options
-  has_many :answers
+  has_many :answers, dependent: :destroy
 end

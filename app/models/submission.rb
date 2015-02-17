@@ -9,7 +9,7 @@ class Submission
 
   belongs_to :user
   belongs_to :competition
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
   validates_presence_of :user_id, :competition_id, :submitted_at
 
