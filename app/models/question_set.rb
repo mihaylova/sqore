@@ -5,7 +5,7 @@ class QuestionSet
   field :_id, type: String, default: -> { tag }
 
   has_many :questions
-  has_and_belongs_to_many :competitions
+  embedded_in :competitions
 
   validates_presence_of :tag
 end
