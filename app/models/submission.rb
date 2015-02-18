@@ -12,7 +12,7 @@ class Submission
   has_many :answers, dependent: :destroy
 
   validates_presence_of :user_id, :submitted_at
-  validates_associated :competition
+  validates_associated :competition, :user
 
   default_scope -> { where(checked: true) }
   scope :unchecked, -> { where(checked: false) }

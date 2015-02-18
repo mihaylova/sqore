@@ -24,4 +24,13 @@ RSpec.describe Competition, :type => :model do
 
     it { expect(competition.generate_report).to eq report }
   end
+
+  describe '#questions_ids' do
+    let(:competition) { create(:competition) }
+    let(:question_sets) { create_list(:question_set, 2, competition: competition) }
+    let!(:questions_1) { create_list(:question, 2, question_set: question_sets.first) }
+    let!(:questions_2) { create_list(:question, 3, question_set: question_sets.last) }
+
+    it { expect(competition.question_ids).to eq (questions_1 + questions_2).map(&:id).sort }
+  end
 end
