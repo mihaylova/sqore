@@ -5,8 +5,6 @@ class Answer
   field :score, type: Integer
   field :option_id
   field :skipped, type: Boolean, default: false
-  field :question_id, type: Integer
-  field :submission_id, type: Integer
 
   belongs_to :submission
   belongs_to :question

@@ -3,7 +3,6 @@ class Submission
 
   field :total, type: Integer
   field :user_id, type: Integer
-  field :competition_id, type: Integer
   field :submitted_at, type: DateTime
   field :checked, type: Boolean, default: false
   field :finished, type: Boolean, default: false
