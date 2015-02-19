@@ -9,17 +9,32 @@ RSpec.describe Competition, :type => :model do
     let!(:submission1) { create(:submission, competition: competition, user: user1, total: 12) }
     let!(:submission2) { create(:submission, competition: competition, user: user2, total: 10) }
     let!(:submission3) { create(:submission, competition: competition, user: user3, checked: false) }
+    let!(:fb_post) { create(:fb_post, user: user1, competition: competition) }
 
     let(:report) do
       [{ name: user1.name,
          email: user1.email,
          total: submission1.total,
-         user_files: user1.files.map(&:url).join(', ') },
+         user_files: user1.files.map(&:url).join(', '),
+         fb_shares: 2,
+         fb_comments: 3 },
        { name: user2.name,
          email: user2.email,
          total: submission2.total,
-         user_files: user2.files.map(&:url).join(', ') }
+         user_files: user2.files.map(&:url).join(', '),
+         fb_shares: 'no data',
+         fb_comments: 'no data' }
       ]
+    end
+
+    let(:fb_response) do
+      { 'shares' => { 'data' => [1, 2] },
+        'comments' => { 'data' => [1, 2, 3] }
+      }
+    end
+
+    before do
+      allow_any_instance_of(Koala::Facebook::API).to receive(:get_object).and_return(fb_response)
     end
 
     it { expect(competition.generate_report).to eq report }

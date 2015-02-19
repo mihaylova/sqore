@@ -13,4 +13,5 @@ class User
               store_as: 'user_cloud_storage_files'
 
   has_many :submissions, dependent: :destroy
+  has_many :fb_posts, dependent: :destroy
 end
