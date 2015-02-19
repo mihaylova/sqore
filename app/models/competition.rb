@@ -14,12 +14,7 @@ class Competition
     submissions.includes(:user).map do |submission|
       fb_post = fb_posts.where(user: submission.user).first
       fb_data = fb_post.try(:data, graph) || FbPost.no_data
-      { name: submission.user.name,
-        email: submission.user.email,
-        total: submission.total,
-        user_files: submission.user.files.map(&:url).join(', '),
-        fb_shares: fb_data[:shares],
-        fb_comments: fb_data[:comments] }
+      submission.generate_report_data.merge(fb_data)
     end
   end
 end

@@ -30,6 +30,13 @@ class Submission
     end
   end
 
+  def generate_report_data
+    { name: user.name,
+      email: user.email,
+      total: total,
+      user_files: user.files.map(&:url).join(', ') }
+  end
+
   private
 
   def finish_submission?(_answer)

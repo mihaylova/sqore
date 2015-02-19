@@ -16,14 +16,14 @@ RSpec.describe Competition, :type => :model do
          email: user1.email,
          total: submission1.total,
          user_files: user1.files.map(&:url).join(', '),
-         fb_shares: 2,
-         fb_comments: 3 },
+         shares: 2,
+         comments: 3 },
        { name: user2.name,
          email: user2.email,
          total: submission2.total,
          user_files: user2.files.map(&:url).join(', '),
-         fb_shares: 'no data',
-         fb_comments: 'no data' }
+         shares: 'no data',
+         comments: 'no data' }
       ]
     end
 
