@@ -12,12 +12,12 @@ class Submission
   has_many :answers,
            dependent: :destroy,
            before_add: :validate_answer,
-           after_add: :finish_submission?
+           after_add: :finish_submission
 
   validates_presence_of :user_id, :submitted_at
   validates_associated :competition, :user
 
-  default_scope -> { where(checked: true).where(finished: true) }
+  default_scope -> { where(checked: true, finished: true) }
   scope :unchecked, -> { where(checked: false) }
   scope :unfinished, -> { where(finished: false) }
 
@@ -39,8 +39,12 @@ class Submission
 
   private
 
-  def finish_submission?(_answer)
-    update(finished: true) if answers.map(&:question_id) == competition.question_ids
+  def finish_submission(_answer)
+    update(finished: true) if finish?
+  end
+
+  def finish?
+    answers.map(&:question_id).sort == competition.question_ids.sort
   end
 
   def validate_answer(answer)
